@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { bg_img, cursor_down, cursor_right, location_icon, write_icon } from "../constant";
+import { bg_img, cursor_down, cursor_right, cursor_up, location_icon, write_icon } from "../constant";
 import { useNavigate } from "react-router-dom";
 
 
@@ -15,7 +15,8 @@ const CreateEvent = () => {
     const [location, setLocation] = useState('');
     const [landMark, setLandMark] = useState('');
     const [visibility, setVisibility] = useState(cursor_right);
-    const [description, setDescription] = useState(cursor_right)
+    const [description, setDescription] = useState(cursor_right);
+    const [descriptionText, setDescriptionText]= useState('')
     const [cards, setCards] = useState([]);
 
     const validateDates = (start, end) => {
@@ -54,8 +55,9 @@ const CreateEvent = () => {
         const isDateValid = startTime && endTime && !error;
         const isLocationValid = location && location.trim() !== '';
         const isValidImage = handleImage != bg_img;
+        const isDescription = descriptionText && descriptionText.trim() !== '';
         console.log(isTitleValid);
-        return isTitleValid && isDateValid && isLocationValid && isValidImage;
+        return isTitleValid && isDateValid && isLocationValid && isValidImage &&isDescription;
         localStorage.setItem()
     }
 
@@ -113,11 +115,13 @@ const CreateEvent = () => {
       const base64String = canvas.toDataURL('image/jpeg');
       
       setHandleImage(base64String);
+      setButtonText("Replace Photos");
     };
         if (file) {
             const url = URL.createObjectURL(file);
             img.src = url;
           }
+        
     }
 
     const handleVisibilty = () => {
@@ -160,9 +164,9 @@ const CreateEvent = () => {
                     <form onSubmit={handleSubmit} className="w-4/5 md:w-3/5 md:mx-20 overflow-hidden">
                         <div className="grid grid-cols-6 mt-4">
                             <div className="flex flex-col col-span-1">
-                                <img className="h-8 w-8" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFCRsoBIonmU8s6aj2Fw_YA2DH53Ghidk1g2l_C5U15moSVFHn4RAlJ6ctuwBwvVlmZ98&usqp=CAU" />
+                                <img className="h-8 w-8" src={cursor_up} />
                                 <div className="h-8 w-8 ml-4 border-l-2 border-gray-400 "></div>
-                                <img className="h-8 w-8" src="https://icons.veryicon.com/png/o/miscellaneous/simple-and-round-line-mark/down-arrow-56.png" />
+                                <img className="h-8 w-8" src={cursor_down} />
                             </div>
                             <div className="col-span-5 h-24 flex flex-col justify-between">
                                 <div className=" flex items-center justify-between">
@@ -244,6 +248,8 @@ const CreateEvent = () => {
                             placeholder="Add a brief description to let attendees know about your event"
                             className="my-4 w-full h-16 border-2 border-slate-600 rounded-lg text-wrap"
                             required
+                            value={descriptionText}
+                            onChange={(e) => setDescriptionText(e.target.value)}
                         />}
                     </div>
 
