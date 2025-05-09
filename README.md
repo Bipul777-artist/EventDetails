@@ -1,4 +1,5 @@
-#This was a take home-assignment I was given for one of my interview. Unfortunately, I didn't cleared it. I have pushed the code here, someday I will come and play around with it. To see why this was not good enough. Thanks :)
+# This was a take home-assignment I received for one of my interview. Unfortunately, I didn't cleared it. I have pushed the code here, someday I will come and play around with it. To see why this was not good enough. In case, you can find it, please let me know. Thanks :)
+
 
 # Getting Started with Create React App
 
